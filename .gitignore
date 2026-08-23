@@ -1,0 +1,49 @@
+# ESP-IDF build output
+/build/
+/managed_components/
+/compile_commands.json
+/CMakeCache.txt
+/CMakeFiles/
+/cmake_install.cmake
+/ninja-log
+/.ninja_deps
+/.ninja_log
+
+# Local configuration: sdkconfig contains Wi-Fi credentials
+/sdkconfig
+/sdkconfig.old
+/sdkconfig.*.old
+
+# Optional local secrets
+/.env
+/.env.*
+!/.env.example
+/main/secrets.h
+
+# ESP-IDF / Python caches
+/.cache/
+/.pytest_cache/
+/**/__pycache__/
+*.py[cod]
+
+# IDE and editor state
+/.vscode/
+/.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and crash dumps
+*.log
+*.dmp
+core
+core.*
+
+# Keep dependencies.lock committed to pin managed component versions.
+# Keep sdkconfig.defaults committed; it contains safe project defaults only.

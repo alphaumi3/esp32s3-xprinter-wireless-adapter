@@ -1,0 +1,32 @@
+menu "ZP450 print server"
+
+config ZP_WIFI_SSID
+    string "Wi-Fi SSID"
+    default "YOUR_WIFI"
+
+config ZP_WIFI_PASSWORD
+    string "Wi-Fi password"
+    default "YOUR_PASSWORD"
+
+config ZP_HOSTNAME
+    string "Host name"
+    default "zp450"
+
+config ZP_RAW_PORT
+    int "Raw TCP printing port"
+    default 9100
+
+config ZP_MAX_HTTP_JOB
+    int "Maximum HTTP job size (bytes)"
+    default 524288
+
+config ZP_RGB_LED_GPIO
+    int "Onboard RGB LED GPIO (-1 disables LED)"
+    default 48
+
+config ZP_RGB_BRIGHTNESS
+    int "RGB LED brightness (1-255)"
+    range 1 255
+    default 20
+
+endmenu
