@@ -27,7 +27,7 @@ Dự án phát triển dựa trên nền tảng USB Host Printer Driver từ [es
 
 1. **Kit ESP32-S3 DevKit** (có 2 cổng Type-C: UART/COM và USB-OTG). Flash tối thiểu 4MB.
 2. **Cáp USB-OTG Type-C sang USB-A (hoặc Type-B)** để cắm từ ESP32-S3 sang cổng USB của máy in.
-3. **Nguồn 5V ổn định**: Cấp nguồn đủ dòng (khuyên dùng $\ge 1.5A$) vào chân 5V/VBUS của kit ESP32-S3.
+3. **Nguồn 5V ổn định**: Cấp nguồn đủ dòng (khuyên dùng ≥ 1.5A) vào chân 5V/VBUS của kit ESP32-S3.
 4. **Máy in mã vạch XPrinter XP-420B** (hoặc các dòng Xprinter / Gprinter tương đương dùng lệnh TSPL/ESC-POS).
 
 ---
@@ -35,16 +35,23 @@ Dự án phát triển dựa trên nền tảng USB Host Printer Driver từ [es
 ## 🚀 Hướng dẫn cài đặt & Nạp Firmware
 
 ### 1. Chuẩn bị môi trường
+
 - Tải và cài đặt **ESP-IDF v5.5 (Offline Installer)** cho Windows từ trang chủ Espressif.
 - Sử dụng cửa sổ dòng lệnh **ESP-IDF 5.5 CMD**.
 
 ### 2. Tải mã nguồn & cấu hình
+
 ```bash
-git clone [https://github.com/](https://github.com/)<your-username>/esp32s3-xprinter-wireless-adapter.git
+git clone https://github.com/<your-username>/esp32s3-xprinter-wireless-adapter.git
 cd esp32s3-xprinter-wireless-adapter
 
 # Thiết lập target là ESP32-S3
 idf.py set-target esp32s3
+
+# Cấu hình dự án
+idf.py menuconfig
+```
+
 Trong giao diện `menuconfig`:
 
 1. **Cấu hình Wi-Fi & Máy in**:
@@ -72,8 +79,8 @@ idf.py -p COM5 flash monitor
 
 ### 1. In thử qua mạng Wi-Fi (HTTP / PowerShell)
 
-* Mở trình duyệt kiểm tra: `http://xp420b.local/health` → phải hiện `{"printer":"online", ...}`.
-* Gửi lệnh in thử TSPL qua PowerShell:
+- Mở trình duyệt kiểm tra: `http://xp420b.local/health` → phải hiện `{"printer":"online", ...}`.
+- Gửi lệnh in thử TSPL qua PowerShell:
 
 ```powershell
 $cmd = "SIZE 40 mm, 30 mm`r`nGAP 2 mm, 0 mm`r`nCLS`r`nTEXT 50,50,`"3`",0,1,1,`"TEST XPRINTER`"`r`nPRINT 1,1`r`n"
@@ -83,19 +90,19 @@ curl.exe --data-binary "@$HOME\test.bin" http://xp420b.local/print
 
 ### 2. In qua Bluetooth Low Energy (BLE)
 
-* **Tên thiết bị BLE mặc định**: `XP-420B_BLE`
-* Sử dụng app **Serial Bluetooth Terminal** (tab BLE) hoặc **RawBT**:
-  * Quét và kết nối tới `XP-420B_BLE`.
-  * Service: **Nordic UART Service** (`6E400001-B5A3-F393-E0A9-E50E24DCCA9E`).
-  * Gửi mã lệnh in TSPL:
+- **Tên thiết bị BLE mặc định**: `XP-420B_BLE`
+- Sử dụng app **Serial Bluetooth Terminal** (tab BLE) hoặc **RawBT**:
+  - Quét và kết nối tới `XP-420B_BLE`.
+  - Service: **Nordic UART Service** (`6E400001-B5A3-F393-E0A9-E50E24DCCA9E`).
+  - Gửi mã lệnh in TSPL:
 
-```text
-SIZE 40 mm, 30 mm
-GAP 2 mm, 0 mm
-CLS
-TEXT 50,50,"3",0,1,1,"BLE PRINT OK"
-PRINT 1,1
-```
+    ```text
+    SIZE 40 mm, 30 mm
+    GAP 2 mm, 0 mm
+    CLS
+    TEXT 50,50,"3",0,1,1,"BLE PRINT OK"
+    PRINT 1,1
+    ```
 
 ### 3. Thêm máy in trực tiếp vào Windows (Raw Port 9100)
 
@@ -119,11 +126,5 @@ PRINT 1,1
 
 ## 📜 Giấy phép & Lời cảm ơn (Credits)
 
-* Dựa trên mã nguồn gốc [esp32-zp450-print-server](https://github.com/mckinlk/esp32-zp450-print-server) của tác giả **mckinlk** (MIT License).
-* Tích hợp thêm BLE UART stack bởi **Redline Co.,Ltd**.
-
-```bash
-idf.py -p COM5 flash monitor
-
-# Cấu hình dự án
-idf.py menuconfig
+- Dựa trên mã nguồn gốc [esp32-zp450-print-server](https://github.com/mckinlk/esp32-zp450-print-server) của tác giả **mckinlk** (MIT License).
+- Tích hợp thêm BLE UART stack bởi **Redline Co.,Ltd**.
