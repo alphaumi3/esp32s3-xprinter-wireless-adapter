@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include "ble_print.h"
 #include "esp_check.h"
 #include "esp_event.h"
 #include "esp_http_server.h"
@@ -138,7 +139,7 @@ static void wifi_start(void)
     ESP_ERROR_CHECK(esp_wifi_start());
 }
 
-static bool enqueue_copy(const uint8_t *data, size_t len)
+bool enqueue_copy(const uint8_t *data, size_t len)
 {
     print_job_t job = { .data = malloc(len), .len = len };
     if (!job.data) return false;
@@ -367,6 +368,7 @@ void app_main(void)
     }
     print_queue = xQueueCreate(JOB_QUEUE_DEPTH, sizeof(print_job_t));
     led_start();
+		ble_print_init();
     wifi_start();
 
     usb_host_config_t usb_cfg = { .skip_phy_setup = false, .intr_flags = ESP_INTR_FLAG_LEVEL1 };
