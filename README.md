@@ -127,4 +127,4 @@ curl.exe --data-binary "@$HOME\test.bin" http://xp420b.local/print
 ## 📜 Giấy phép & Lời cảm ơn (Credits)
 
 - Dựa trên mã nguồn gốc [esp32-zp450-print-server](https://github.com/mckinlk/esp32-zp450-print-server) của tác giả **mckinlk** (MIT License).
-- Tích hợp thêm BLE UART stack bởi **Redline Co.,Ltd**.
+- Tích hợp thêm BLE UART stack bởi **ShieldX Co.,Ltd**.
