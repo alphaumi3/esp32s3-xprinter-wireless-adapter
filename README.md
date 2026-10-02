@@ -45,6 +45,22 @@ cd esp32s3-xprinter-wireless-adapter
 
 # Thiết lập target là ESP32-S3
 idf.py set-target esp32s3
+Trong giao diện `menuconfig`:
+
+1. **Cấu hình Wi-Fi & Máy in**:
+   - Vào mục cấu hình máy in/server (ví dụ: `ZP450 print server`): Điền **Wi-Fi SSID**, **Mật khẩu**, **Hostname** (ví dụ `xp420b`), chân **GPIO cho đèn LED RGB** (ví dụ `GPIO 48`).
+2. **Cấu hình Bluetooth (NimBLE)**:
+   - Vào `Component config` $\rightarrow$ `Bluetooth`: Nhấn phím cách `[ * ]` để kích hoạt **Bluetooth**.
+   - Vào `Bluetooth Host`: Chọn **NimBLE - BLE only**.
+3. **Mở rộng phân vùng (Bắt buộc)**:
+   - Vào `Partition Table` $\rightarrow$ Chọn **Single factory app (large), no OTA** (để nới rộng phân vùng lên 2MB tránh lỗi tràn bộ nhớ `overflow`).
+4. Nhấn **S** để lưu và **Q** để thoát.
+
+### 3. Biên dịch và nạp code
+Cắm cổng **COM/UART** của ESP32-S3 vào máy tính và chạy:
+
+```bash
+idf.py -p COM5 flash monitor
 
 # Cấu hình dự án
 idf.py menuconfig
