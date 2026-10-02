@@ -45,6 +45,7 @@ cd esp32s3-xprinter-wireless-adapter
 
 # Thiết lập target là ESP32-S3
 idf.py set-target esp32s3
+
 Trong giao diện `menuconfig`:
 
 1. **Cấu hình Wi-Fi & Máy in**:
